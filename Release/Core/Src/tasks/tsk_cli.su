@@ -1,0 +1,6 @@
+tsk_cli.c:80:12:nt_callback	8	static
+tsk_cli.c:74:12:write	16	static
+tsk_cli.c:68:6:initialize_cli	8	static
+tsk_cli.c:87:9:handle_terminal	24	static
+tsk_cli.c:107:6:tsk_cli_TaskProc	816	static
+tsk_cli.c:157:6:tsk_cli_Start	16	static

@@ -72,7 +72,7 @@ void show_overlay_100ms(port_str *ptr){
     	uint8_t row_pos = 1;
     	uint8_t col_pos = 90;
     	//Term_Erase_Screen(ptr);
-    	Term_Box(row_pos, col_pos, row_pos + 6, col_pos + 25, ptr);
+    	Term_Box(row_pos, col_pos, row_pos + 7, col_pos + 25, ptr);
     	Term_Move_Cursor(row_pos + 1, col_pos + 1, ptr);
     	ret = snprintf(buffer, sizeof(buffer), "Curr A     :      %+.2fA", (float)analog.curr_a/1000.0);
         send_buffer((uint8_t*)buffer,ret,ptr);
@@ -92,6 +92,10 @@ void show_overlay_100ms(port_str *ptr){
 
     	Term_Move_Cursor(row_pos + 5, col_pos + 1, ptr);
     	ret = snprintf(buffer, sizeof(buffer), "Temp       :     %.1f *C",(float)NTC_ADC2Temperature(adc_buffer.ntc)/10.0);
+        send_buffer((uint8_t*)buffer,ret,ptr);
+
+    	Term_Move_Cursor(row_pos + 6, col_pos + 1, ptr);
+    	ret = snprintf(buffer, sizeof(buffer), "RPM        :       %dRPM", rtY_Left.n_mot * 2);
         send_buffer((uint8_t*)buffer,ret,ptr);
 
     	Term_Restore_Cursor(ptr);

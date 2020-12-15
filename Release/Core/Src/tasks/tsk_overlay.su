@@ -1,0 +1,4 @@
+tsk_overlay.c:64:6:show_overlay_100ms	88	static
+tsk_overlay.c:140:6:show_overlay_400ms	16	static
+tsk_overlay.c:176:6:tsk_overlay_TaskProc	16	static
+tsk_overlay.c:227:6:tsk_overlay_Start	24	static
