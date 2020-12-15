@@ -61,8 +61,8 @@ all: main-build
 main-build: M365_custom_firmware.elf secondary-outputs
 
 # Tool invocations
-M365_custom_firmware.elf: $(OBJS) $(USER_OBJS) C:\VSARM\Workspace\M365_custom_firmware\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "M365_custom_firmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\VSARM\Workspace\M365_custom_firmware\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="M365_custom_firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+M365_custom_firmware.elf: $(OBJS) $(USER_OBJS) C:\Users\AMD-Game-X64\STM32CubeIDE\workspace_1.5.0\M365_custom_firmware\STM32F103C8TX_FLASH.ld
+	arm-none-eabi-gcc -o "M365_custom_firmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\AMD-Game-X64\STM32CubeIDE\workspace_1.5.0\M365_custom_firmware\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="M365_custom_firmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -22,4 +22,4 @@ cli_common.c:526:9:command_tterm	16	static
 cli_common.c:560:6:send_signal_state	8	static
 cli_common.c:572:6:send_signal_state_wo	8	static
 cli_common.c:590:9:command_signals	112	static
-cli_common.c:650:6:nt_interpret	48	static
+cli_common.c:653:6:nt_interpret	48	static

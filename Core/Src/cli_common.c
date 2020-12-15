@@ -633,6 +633,9 @@ uint8_t command_signals(char *commandline, port_str *ptr) {
 		ret = snprintf_(buf, sizeof(buf), "VBAT: %f\r\n",DC_BUS_CNTtoV(adc_buffer.vbat));
 		send_buffer((uint8_t*)buf, ret, ptr);
 
+		ret = snprintf_(buf, sizeof(buf), "RPM: %d\r\n",rtY_Left.n_mot * 2);
+		send_buffer((uint8_t*)buf, ret, ptr);
+
 		SEND_CONST_STRING("Power button:", ptr);
 		send_signal_state(HAL_GPIO_ReadPin(PWR_BTN_GPIO_Port, PWR_BTN_Pin), pdFALSE, ptr);
 

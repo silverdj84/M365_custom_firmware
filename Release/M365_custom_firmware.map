@@ -2905,20 +2905,19 @@ LOAD c:/st/stm32cubeide_1.5.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .rodata.tsk_cli_Start.str1.1
                 0x000000000800db6f        0x9 Core/Src/tasks/tsk_cli.o
  .rodata.show_overlay_100ms.str1.1
-                0x000000000800db78       0x94 Core/Src/tasks/tsk_overlay.o
+                0x000000000800db78       0x95 Core/Src/tasks/tsk_overlay.o
  .rodata.tsk_overlay_Start.str1.1
-                0x000000000800dc0c        0x8 Core/Src/tasks/tsk_overlay.o
+                0x000000000800dc0d        0x8 Core/Src/tasks/tsk_overlay.o
  .rodata.tsk_uart_Start.str1.1
-                0x000000000800dc14        0x9 Core/Src/tasks/tsk_uart.o
+                0x000000000800dc15        0x9 Core/Src/tasks/tsk_uart.o
  .rodata.vTaskStartScheduler.str1.1
-                0x000000000800dc1d        0x5 Middlewares/Third_Party/FreeRTOS/Source/tasks.o
+                0x000000000800dc1e        0x5 Middlewares/Third_Party/FreeRTOS/Source/tasks.o
  .rodata.prvCheckForValidListAndQueue.str1.1
-                0x000000000800dc22        0x5 Middlewares/Third_Party/FreeRTOS/Source/timers.o
+                0x000000000800dc23        0x5 Middlewares/Third_Party/FreeRTOS/Source/timers.o
  .rodata.xTimerCreateTimerTask.str1.1
-                0x000000000800dc27        0x8 Middlewares/Third_Party/FreeRTOS/Source/timers.o
+                0x000000000800dc28        0x8 Middlewares/Third_Party/FreeRTOS/Source/timers.o
  .rodata._strtod_l.str1.1
-                0x000000000800dc2f        0xc c:/st/stm32cubeide_1.5.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc_nano.a(lib_a-strtod.o)
- *fill*         0x000000000800dc3b        0x1 
+                0x000000000800dc30        0xc c:/st/stm32cubeide_1.5.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc_nano.a(lib_a-strtod.o)
  .rodata.fpi.6160
                 0x000000000800dc3c       0x14 c:/st/stm32cubeide_1.5.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.5.0.202011040924/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m\libc_nano.a(lib_a-strtod.o)
  .rodata.fpinan.6196

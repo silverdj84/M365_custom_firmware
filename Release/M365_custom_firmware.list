@@ -9146,7 +9146,7 @@ Disassembly of section .text:
  8005d7e:	4620      	mov	r0, r4
  8005d80:	f7fd f9a4 	bl	80030cc <Term_Disable_Cursor>
  8005d84:	2373      	movs	r3, #115	; 0x73
- 8005d86:	2207      	movs	r2, #7
+ 8005d86:	2208      	movs	r2, #8
  8005d88:	215a      	movs	r1, #90	; 0x5a
  8005d8a:	2001      	movs	r0, #1
  8005d8c:	9400      	str	r4, [sp, #0]
@@ -9434,7 +9434,7 @@ Disassembly of section .text:
  8006086:	bf00      	nop
  8006088:	200005f1 	.word	0x200005f1
  800608c:	200044d0 	.word	0x200044d0
- 8006090:	0800dc0c 	.word	0x0800dc0c
+ 8006090:	0800dc0d 	.word	0x0800dc0d
  8006094:	08006011 	.word	0x08006011
 
 08006098 <tsk_uart_TaskProc>:
@@ -9512,7 +9512,7 @@ Disassembly of section .text:
  800613e:	bd10      	pop	{r4, pc}
  8006140:	200005f2 	.word	0x200005f2
  8006144:	200044d8 	.word	0x200044d8
- 8006148:	0800dc14 	.word	0x0800dc14
+ 8006148:	0800dc15 	.word	0x0800dc15
  800614c:	08006099 	.word	0x08006099
 
 08006150 <Reset_Handler>:
@@ -14598,7 +14598,7 @@ Disassembly of section .text:
  80091c0:	f3bf 8f4f 	dsb	sy
  80091c4:	e7fe      	b.n	80091c4 <vTaskStartScheduler+0x70>
  80091c6:	bf00      	nop
- 80091c8:	0800dc1d 	.word	0x0800dc1d
+ 80091c8:	0800dc1e 	.word	0x0800dc1e
  80091cc:	08008e7d 	.word	0x08008e7d
  80091d0:	20001148 	.word	0x20001148
  80091d4:	20001164 	.word	0x20001164
@@ -15477,7 +15477,7 @@ Disassembly of section .text:
  8009a3c:	20001178 	.word	0x20001178
  8009a40:	20001174 	.word	0x20001174
  8009a44:	20001244 	.word	0x20001244
- 8009a48:	0800dc22 	.word	0x0800dc22
+ 8009a48:	0800dc23 	.word	0x0800dc23
 
 08009a4c <prvInsertTimerInActiveList>:
  8009a4c:	4291      	cmp	r1, r2
@@ -15544,7 +15544,7 @@ Disassembly of section .text:
  8009ad8:	b008      	add	sp, #32
  8009ada:	bd10      	pop	{r4, pc}
  8009adc:	2000128c 	.word	0x2000128c
- 8009ae0:	0800dc27 	.word	0x0800dc27
+ 8009ae0:	0800dc28 	.word	0x0800dc28
  8009ae4:	08009bc1 	.word	0x08009bc1
  8009ae8:	20001290 	.word	0x20001290
 
@@ -16962,9 +16962,9 @@ Disassembly of section .text:
  800a8c0:	f8cb 3000 	str.w	r3, [fp]
  800a8c4:	e761      	b.n	800a78a <_strtod_l+0x452>
  800a8c6:	bf00      	nop
- 800a8c8:	0800dc2f 	.word	0x0800dc2f
- 800a8cc:	0800dc32 	.word	0x0800dc32
- 800a8d0:	0800dc38 	.word	0x0800dc38
+ 800a8c8:	0800dc30 	.word	0x0800dc30
+ 800a8cc:	0800dc33 	.word	0x0800dc33
+ 800a8d0:	0800dc39 	.word	0x0800dc39
  800a8d4:	0800dc50 	.word	0x0800dc50
  800a8d8:	0800dcc0 	.word	0x0800dcc0
  800a8dc:	0800dc98 	.word	0x0800dc98
