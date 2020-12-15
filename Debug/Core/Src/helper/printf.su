@@ -1,0 +1,11 @@
+printf.c:108:20:_out_buffer	0	static
+printf.c:117:20:_out_null	0	static
+printf.c:134:20:_out_fct	0	static
+printf.c:249:15:_ntoa_long	80	static
+printf.c:124:20:_out_char	0	static
+printf.c:442:12:_vsnprintf	144	static
+printf.c:715:5:printf_	24	static
+printf.c:726:5:sprintf_	20	static
+printf.c:736:5:snprintf_	24	static
+printf.c:746:5:vsnprintf_	16	static
+printf.c:752:5:fctprintf	32	static

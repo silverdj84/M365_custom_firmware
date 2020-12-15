@@ -1,0 +1,17 @@
+BLDC_controller.c:123:9:plook_u8s16_evencka	0	static
+BLDC_controller.c:150:9:plook_u8u16_evencka	0	static
+BLDC_controller.c:177:9:div_nde_s32_floor	0	static
+BLDC_controller.c:184:6:Counter_Init	0	static
+BLDC_controller.c:191:9:Counter	0	static
+BLDC_controller.c:231:6:PI_clamp_fixdt	20	static
+BLDC_controller.c:356:6:Low_Pass_Filter_Reset	0	static
+BLDC_controller.c:364:6:Low_Pass_Filter	20	static
+BLDC_controller.c:426:6:I_backCalc_fixdt_Init	0	static
+BLDC_controller.c:438:6:I_backCalc_fixdt	20	static
+BLDC_controller.c:502:6:Counter_b_Init	0	static
+BLDC_controller.c:513:10:Counter_i	0	static
+BLDC_controller.c:552:11:either_edge	0	static
+BLDC_controller.c:567:6:Debounce_Filter_Init	0	static
+BLDC_controller.c:589:6:Debounce_Filter	24	static
+BLDC_controller.c:665:6:BLDC_controller_step	112	static
+BLDC_controller.c:2518:6:BLDC_controller_initialize	0	static

@@ -1,0 +1,6 @@
+teslaterm.c:14:6:send_gauge	0	static
+teslaterm.c:21:6:send_chart	0	static
+teslaterm.c:27:6:send_chart_draw	0	static
+teslaterm.c:31:6:send_chart_config	40	static
+teslaterm.c:49:6:send_gauge_config	32	static
+teslaterm.c:65:6:send_config	32	static
