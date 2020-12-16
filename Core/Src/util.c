@@ -61,10 +61,25 @@ ExtY     rtY_Left;                      /* External outputs */
 
 void BLDC_Init(void) {
   /* Set BLDC controller parameters */ 
-  rtP_Left.b_selPhaABCurrMeas   = 1;            // Left motor measured current phases {Green, Blue} = {iA, iB} -> do NOT change
+	/*
+  rtP_Left.z_selPhaCurMeasABC   = 1;            // Left motor measured current phases {Green, Blue} = {iA, iB} -> do NOT change
   rtP_Left.z_ctrlTypSel         = CTRL_TYP_SEL;
   rtP_Left.b_diagEna            = DIAG_ENA; 
+*/
 
+  rtP_Left.b_angleMeasEna       = 0;            // Motor angle input: 0 = estimated angle, 1 = measured angle (e.g. if encoder is available)
+  rtP_Left.z_selPhaCurMeasABC   = 0;            // Left motor measured current phases {Green, Blue} = {iA, iB} -> do NOT change
+  rtP_Left.z_ctrlTypSel         = CTRL_TYP_SEL;
+  rtP_Left.b_diagEna            = DIAG_ENA;
+  /*
+  rtP_Left.i_max                = (I_MOT_MAX * A2BIT_CONV) << 4;        // fixdt(1,16,4)
+  rtP_Left.n_max                = N_MOT_MAX << 4;                       // fixdt(1,16,4)
+  */
+  rtP_Left.b_fieldWeakEna       = FIELD_WEAK_ENA;
+  rtP_Left.id_fieldWeakMax      = (FIELD_WEAK_MAX * A2BIT_CONV) << 4;   // fixdt(1,16,4)
+  rtP_Left.a_phaAdvMax          = PHASE_ADV_MAX << 4;                   // fixdt(1,16,4)
+  rtP_Left.r_fieldWeakHi        = FIELD_WEAK_HI << 4;                   // fixdt(1,16,4)
+  rtP_Left.r_fieldWeakLo        = FIELD_WEAK_LO << 4;                   // fixdt(1,16,4)
 
   /* Pack LEFT motor data into RTM */
   rtM_Left->defaultParam        = &rtP_Left;

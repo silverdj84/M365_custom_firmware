@@ -620,7 +620,6 @@ uint8_t command_signals(char *commandline, port_str *ptr) {
 		ret = snprintf_(buf, sizeof(buf), "Volt_A %u\r\n",adc_buffer.volt_a);
 		send_buffer((uint8_t*)buf, ret, ptr);
 
-
 		ret = snprintf_(buf, sizeof(buf), "Volt_B %u\r\n",adc_buffer.volt_b);
 		send_buffer((uint8_t*)buf, ret, ptr);
 
@@ -638,7 +637,6 @@ uint8_t command_signals(char *commandline, port_str *ptr) {
 
 		SEND_CONST_STRING("Power button:", ptr);
 		send_signal_state(HAL_GPIO_ReadPin(PWR_BTN_GPIO_Port, PWR_BTN_Pin), pdFALSE, ptr);
-
 
 
     }
