@@ -1,3 +1,0 @@
-util.c:62:6:BLDC_Init	0	static
-util.c:99:7:filtLowPass32	16	static
-util.c:112:6:rateLimiter16	0	static

@@ -1,3 +1,0 @@
-vtrecv.c:2708:13:do_action	0	static
-vtrecv.c:2699:6:vtrecv_init	0	static
-vtrecv.c:2814:6:vtrecv_execute	48	static

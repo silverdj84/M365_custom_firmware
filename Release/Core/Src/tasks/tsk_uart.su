@@ -1,2 +1,0 @@
-tsk_uart.c:73:6:tsk_uart_TaskProc	152	static
-tsk_uart.c:129:6:tsk_uart_Start	16	static
