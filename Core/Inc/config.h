@@ -9,7 +9,13 @@
 // ############################### DO-NOT-TOUCH SETTINGS ###############################
 #define PWM_FREQ            16000     // PWM frequency in Hz / is also used for buzzer
 #define DEAD_TIME              48     // PWM deadtime
-
+#ifdef VARIANT_TRANSPOTTER
+  #define DELAY_IN_MAIN_LOOP    2
+#else
+  #define DELAY_IN_MAIN_LOOP    5     // in ms. default 5. it is independent of all the timing critical stuff. do not touch if you do not know what you are doing.
+#endif
+#define TIMEOUT                20     // number of wrong / missing input commands before emergency off
+//#define A2BIT_CONV             50     // A to bit for current conversion on ADC. Example: 1 A = 50, 2 A = 100, etc
 
 // ADC conversion time definitions
 #define ADC_CONV_TIME_1C5       (14)  //Total ADC clock cycles / conversion = (  1.5+12.5)
@@ -101,11 +107,28 @@
    Outputs:
     - speedR and speedL: normal driving INPUT_MIN to INPUT_MAX
 */
+#define COM_CTRL        0               // [-] Commutation Control Type
+#define SIN_CTRL        1               // [-] Sinusoidal Control Type
+#define FOC_CTRL        2               // [-] Field Oriented Control (FOC) Type
+
+#define OPEN_MODE       0               // [-] OPEN mode
+#define VLT_MODE        1               // [-] VOLTAGE mode
+#define SPD_MODE        2               // [-] SPEED mode
+#define TRQ_MODE        3               // [-] TORQUE mode
+
+// Enable/Disable Motor
+#define MOTOR_LEFT_ENA                  // [-] Enable LEFT motor.  Comment-out if this motor is not needed to be operational
+#define MOTOR_RIGHT_ENA                 // [-] Enable RIGHT motor. Comment-out if this motor is not needed to be operational
+
 // Control selections
-#define CTRL_TYP_SEL    2               // [-] Control type selection: 0 = Commutation , 1 = Sinusoidal, 2 = FOC Field Oriented Control (default)
-#define CTRL_MOD_REQ    1               // [-] Control mode request: 0 = Open mode, 1 = VOLTAGE mode (default), 2 = SPEED mode, 3 = TORQUE mode. Note: SPEED and TORQUE modes are only available for FOC!
+#define CTRL_TYP_SEL    FOC_CTRL        // [-] Control type selection: COM_CTRL, SIN_CTRL, FOC_CTRL (default)
+#define CTRL_MOD_REQ    VLT_MODE        // [-] Control mode request: OPEN_MODE, VLT_MODE (default), SPD_MODE, TRQ_MODE. Note: SPD_MODE and TRQ_MODE are only available for CTRL_FOC!
 #define DIAG_ENA        1               // [-] Motor Diagnostics enable flag: 0 = Disabled, 1 = Enabled (default)
 
+// Limitation settings
+#define I_MOT_MAX       15              // [A] Maximum single motor current limit
+#define I_DC_MAX        17              // [A] Maximum stage2 DC Link current limit for Commutation and Sinusoidal types (This is the final current protection. Above this value, current chopping is applied. To avoid this make sure that I_DC_MAX = I_MOT_MAX + 2A)
+#define N_MOT_MAX       1000            // [rpm] Maximum motor speed limit
 
 // Field Weakening / Phase Advance
 #define FIELD_WEAK_ENA  1               // [-] Field Weakening / Phase Advance enable flag: 0 = Disabled (default), 1 = Enabled
@@ -114,7 +137,76 @@
 #define PHASE_ADV_MAX   25              // [deg] Maximum Phase Advance angle (only for SIN). Higher angle results in higher maximum speed.
 #define FIELD_WEAK_HI   1500            // [-] Input target High threshold for reaching maximum Field Weakening / Phase Advance. Do NOT set this higher than 1500.
 #define FIELD_WEAK_LO   1000            // [-] Input target Low threshold for starting Field Weakening / Phase Advance. Do NOT set this higher than 1000.
+
+// Extra functionality
+// #define STANDSTILL_HOLD_ENABLE       // [-] Flag to hold the position when standtill is reached. Only available and makes sense for VOLTAGE or TORQUE mode.
+#define ELECTRIC_BRAKE_ENABLE 1         // [-] Flag to enable electric brake and replace the motor "freewheel" with a constant braking when the input torque request is 0. Only available and makes sense for TORQUE mode.
+#define ELECTRIC_BRAKE_MAX    100       // (0, 500) Maximum electric brake to be applied when input torque request is 0 (pedal fully released).
+#define ELECTRIC_BRAKE_THRES  120       // (0, 500) Threshold below at which the electric brake starts engaging.
 // ########################### END OF MOTOR CONTROL ########################
+
+
+// ############################## DEFAULT SETTINGS ############################
+// Default settings will be applied at the end of this config file if not set before
+#define INACTIVITY_TIMEOUT        8       // Minutes of not driving until poweroff. it is not very precise.
+#define BEEPS_BACKWARD            1       // 0 or 1
+#define FLASH_WRITE_KEY           0x1233  // Flash memory writing key. Change this key to ignore the input calibrations from the flash memory and use the ones in config.h
+
+/* FILTER is in fixdt(0,16,16): VAL_fixedPoint = VAL_floatingPoint * 2^16. In this case 6553 = 0.1 * 2^16
+ * Value of COEFFICIENT is in fixdt(1,16,14)
+ * If VAL_floatingPoint >= 0, VAL_fixedPoint = VAL_floatingPoint * 2^14
+ * If VAL_floatingPoint < 0,  VAL_fixedPoint = 2^16 + floor(VAL_floatingPoint * 2^14).
+*/
+// Value of RATE is in fixdt(1,16,4): VAL_fixedPoint = VAL_floatingPoint * 2^4. In this case 480 = 30 * 2^4
+#define DEFAULT_RATE                480   // 30.0f [-] lower value == slower rate [0, 32767] = [0.0, 2047.9375]. Do NOT make rate negative (>32767)
+#define DEFAULT_FILTER              6553  // Default for FILTER 0.1f [-] lower value == softer filter [0, 65535] = [0.0 - 1.0].
+#define DEFAULT_SPEED_COEFFICIENT   16384 // Default for SPEED_COEFFICIENT 1.0f [-] higher value == stronger. [0, 65535] = [-2.0 - 2.0]. In this case 16384 = 1.0 * 2^14
+#define DEFAULT_STEER_COEFFICIENT   8192  // Defualt for STEER_COEFFICIENT 0.5f [-] higher value == stronger. [0, 65535] = [-2.0 - 2.0]. In this case  8192 = 0.5 * 2^14. If you do not want any steering, set it to 0.
+// ######################### END OF DEFAULT SETTINGS ##########################
+
+
+// ########################### UART SETIINGS ############################
+#if defined(FEEDBACK_SERIAL_USART2) || defined(CONTROL_SERIAL_USART2) || defined(DEBUG_SERIAL_USART2) || defined(SIDEBOARD_SERIAL_USART2) || \
+    defined(FEEDBACK_SERIAL_USART3) || defined(CONTROL_SERIAL_USART3) || defined(DEBUG_SERIAL_USART3) || defined(SIDEBOARD_SERIAL_USART3)
+  #define SERIAL_START_FRAME      0xABCD                  // [-] Start frame definition for serial commands
+  #define SERIAL_BUFFER_SIZE      64                      // [bytes] Size of Serial Rx buffer. Make sure it is always larger than the structure size
+  #define SERIAL_TIMEOUT          160                     // [-] Serial timeout duration for the received data. 160 ~= 0.8 sec. Calculation: 0.8 sec / 0.005 sec
+#endif
+#if defined(FEEDBACK_SERIAL_USART2) || defined(CONTROL_SERIAL_USART2) || defined(DEBUG_SERIAL_USART2) || defined(SIDEBOARD_SERIAL_USART2)
+  #ifndef USART2_BAUD
+    #define USART2_BAUD           115200                  // UART2 baud rate (long wired cable)
+  #endif
+  #define USART2_WORDLENGTH       UART_WORDLENGTH_8B      // UART_WORDLENGTH_8B or UART_WORDLENGTH_9B
+#endif
+#if defined(FEEDBACK_SERIAL_USART3) || defined(CONTROL_SERIAL_USART3) || defined(DEBUG_SERIAL_USART3) || defined(SIDEBOARD_SERIAL_USART3)
+  #ifndef USART3_BAUD
+    #define USART3_BAUD           115200                  // UART3 baud rate (short wired cable)
+  #endif
+  #define USART3_WORDLENGTH       UART_WORDLENGTH_8B      // UART_WORDLENGTH_8B or UART_WORDLENGTH_9B
+#endif
+// ########################### UART SETIINGS ############################
+
+
+
+// ############################### APPLY DEFAULT SETTINGS ###############################
+#ifndef RATE
+  #define RATE DEFAULT_RATE
+#endif
+#ifndef FILTER
+  #define FILTER DEFAULT_FILTER
+#endif
+#ifndef SPEED_COEFFICIENT
+  #define SPEED_COEFFICIENT DEFAULT_SPEED_COEFFICIENT
+#endif
+#ifndef STEER_COEFFICIENT
+  #define STEER_COEFFICIENT DEFAULT_STEER_COEFFICIENT
+#endif
+#ifdef CONTROL_ADC
+  #define INPUT_MARGIN            100                     // Input margin applied on the raw ADC min and max to make sure the motor MIN and MAX values are reached even in the presence of noise
+#else
+  #define INPUT_MARGIN            0
+#endif
+// ########################### END OF APPLY DEFAULT SETTING ############################
 
 
 #endif

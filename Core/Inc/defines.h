@@ -34,6 +34,11 @@ extern uint8_t led_pattern;
 #define LED_MOTOR_ERROR 2
 
 
+#define BUTTON_PIN GPIO_PIN_1
+#define BUTTON_PORT GPIOA
+
+#define CONTROL_SERIAL_USART2 1
+
 #define PHASE_CURR_mA_CNT 50 //mA per bit
 #define DC_VOLT_uV_CNT 14431 //uV per bit
 
